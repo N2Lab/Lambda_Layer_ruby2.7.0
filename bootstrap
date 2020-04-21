@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+if [ -z "$GEM_HOME" ]; then
+    export GEM_HOME=/opt/vendor/bundle/ruby/2.7.0
+fi
+
+if [ -z "$GEM_PATH" ]; then
+    export GEM_PATH=/opt/vendor/bundle/ruby/2.7.0:/opt/ruby/gems/2.7.0
+fi
+
+if [ -z "$AWS_EXECUTION_ENV" ]; then
+    export AWS_EXECUTION_ENV=AWS_Lambda_custom_ruby2.7
+fi
+
+if [ -z "$RUBYLIB" ]; then
+    export RUBYLIB=/opt:/opt/ruby/lib:/var/task:/var/task/ruby/lib
+else
+    export RUBYLIB=/opt:/opt/ruby/lib:/var/task:/var/task/ruby/lib:$RUBYLIB
+fi
+
+export PATH=/var/lang/bin:$PATH
+export PATH=/opt/ruby/bin:$PATH
+
+/opt/lib/runtime.rb
